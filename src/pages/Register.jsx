@@ -19,8 +19,11 @@ const Register = () => {
     e.preventDefault();
     console.log(auth.firstName);
     const displayName =`${auth.firstName} ${auth.lastName}`
-    const time = new Date().getFullYear();
-    console.log(time)
+    const time = new Date();
+   const years = time.getFullYear();
+    const month = time.getMonth();
+    const date = time.getDate();
+    const calendar = `${month}-${date}-${years}`
     //yeni kullanıcı işlemini email ve passwordu yolladık
     createUser(auth.email,auth.password,navigate,displayName);
 

@@ -15,7 +15,6 @@ const initialState={
     currentUser:false
 
 }
-console.log(initialState.currentUser)
 const authSlice = createSlice({
     name:"auth",
     initialState,

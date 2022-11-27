@@ -1,30 +1,31 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import img from "../assets/newBlog.png"
 import useFirebase from '../helpers/firebase';
-import { setTitle,setİmgUrl,setExplanation,setData,setForm } from '../redux/blog'
+import {setForm } from '../redux/blog'
 
 const NewBlog = () => {
  const {AddUser} = useFirebase()
 // console.log(AddUser);
-  const {data,form} = useSelector(state=> state.blog)
+  const {form} = useSelector(state=> state.blog)
   const {currentUser} = useSelector(state=>state.auth)
-  // console.log(form)
-  // console.log(currentUser);
+  const navigate = useNavigate()
+  const time = new Date();
+  const years = time.getFullYear();
+   const month = time.getMonth();
+   const date = time.getDate();
+   const calendar = `${month}-${date}-${years};`
+
   const dispatch = useDispatch()
 
   const handleSubmit = (e) =>{
     e.preventDefault();
     AddUser({...form,email:currentUser.email,
-      displayName:currentUser.displayName});
+      displayName:currentUser.displayName,calendar:calendar,navigate});
       // const {name,value} = e.target;
       // dispatch(setForm({...form,[name]:value}))
   }
-  
-  // const handleChange = (e) =>{
-  //   e.preventDefault();
-  // }
-  
   
   return (
     <>

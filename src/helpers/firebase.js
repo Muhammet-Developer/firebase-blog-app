@@ -3,11 +3,11 @@ import { getAuth,createUserWithEmailAndPassword,
     signInWithEmailAndPassword,onAuthStateChanged,signOut,
      updateProfile,GoogleAuthProvider, signInWithPopup  } from "firebase/auth";
 // import {setContactList, setİsLoading} from "../redux/blog"
-import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import { getDatabase,  onValue,  push, ref, remove, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../redux/auth";
-import { toastLoggedOut, toastLogin, toastSigIn, toastThereIsUser } from "./toastNotify";
+import { toastDeleteComment, toastDeleted, toastLoggedOut, toastLogin, toastNewBlog, toastSigIn, toastThereIsUser, toastUpdate, toastUpdateComment } from "./toastNotify";
 const useFirebase = () => {
         //! LOGİN AYARLARI
         const dispatch = useDispatch()
@@ -15,8 +15,8 @@ const useFirebase = () => {
             apiKey: process.env.REACT_APP_apiKey,
             authDomain: process.env.REACT_APP_authDomain,
             projectId: process.env.REACT_APP_projectId,
-            databaseURL: "https://blog-app-contact-default-rtdb.firebaseio.com",
-            storageBucket: process.env.REACT_APP_storageBucket,
+           databaseURL: "https://blog-app-3f90f-default-rtdb.firebaseio.com",    
+          storageBucket: process.env.REACT_APP_storageBucket,
             messagingSenderId: process.env.REACT_APP_messagingSenderId,
             appId: process.env.REACT_APP_appId
           };    
@@ -102,8 +102,8 @@ const useFirebase = () => {
           }
 
           // ---------------------------------------------
-          
-          const AddUser = (form)=>{
+          //! AddBlog
+          const AddUser = (form,navigate)=>{
             const db = getDatabase();
             //blog sen databese ne oluşturduysan o linkin sonunda ne isim verdiysen o ismi vermelisin
             const userRef = ref(db,"blog/");
@@ -114,61 +114,132 @@ const useFirebase = () => {
               imgUrl:form.imgUrl,
               explanation:form.explanation,
               email:form.email,
-              displayName:form.displayName
+              displayName:form.displayName,
+              calendar:form.calendar
             })
-            console.log("bilgi yazdırıldı")
+            navigate("/")
+            toastNewBlog("New Blog Successfully Added")
             
           } catch (error) {
             console.log(error.message)
           }
-          
           }
-
           const useRead = () =>{
             const [contactList,setContactList] = useState();
+            const [isLoading,setIsLoading] = useState(true);
             useEffect(() => {
               try {
-              const db = getDatabase();
+              const db = getDatabase(app);
               const userRef = ref(db,"blog/");
-              console.log("db",db)
-              console.log("çalıştı")
-             return onValue(userRef,(snapshot)=>{
-                console.log("çalışmadı");
+              onValue(userRef,(snapshot)=>{
                 const data = snapshot.val();
                 const blogArray = [];
                 for(let id in data){
                   blogArray.push({id,...data[id]})
-              } 
-                setContactList(blogArray)
+               } 
+               setContactList(blogArray)
+               setIsLoading(false)
               })
-              } catch (error) {
-                alert(error)
+            } catch (error) {
                 console.log(error);
               }
               
             }, [])
-            return{contactList}
+            return{contactList,isLoading,setContactList}
           }
-
+          //! DELETE
+          const deleteUser = (id,navigate) => {
+            const db = getDatabase(app);
+            const userRef = ref(db,"blog/");
+            if(window.confirm("Will Be Deleted!")=== true){
+              remove(ref(db,"blog/"+id))
+              toastDeleted("Blog successfully deleted")
+              navigate("/")
+            }
+          }
           
-      return {createUser,useRead,AddUser,logout,observerUser,signIn,signUpWithGoogle}
+          //! UPDATE
+          const updateUser = (card2,navigate) =>{
+            const db = getDatabase(app);
+            const userRef = ref(db,"blog/");
+            const updates = {};
+            updates["blog/"+card2.id]=card2;
+            toastUpdate("VERİN GÜNCELLENDİ")
+            navigate(-1)
+            return update(ref(db), updates);
+          }
+          //?-------------------------------------------
+          //-------------------------------------------
+          //! ADD COMMENT USER
+          const addUserComment = (comment,id)=>{
+            const db = getDatabase();
+            //blog sen databese ne oluşturduysan o linkin sonunda ne isim verdiysen o ismi vermelisin
+            const userRef = ref(db,`blog/${id}/comment/`);
+            const newBlogRef = push(userRef)
+          try {
+            set(newBlogRef,{
+              text:comment.text,
+              calendar:comment.calendar,
+              displayName:comment.displayName,
+              time:comment.time,
+              email:comment.email,
+              id:comment.id
+            })       
+            toastNewBlog("yorum eklendi")
+          } catch (error) {
+            console.log(error.message)
+          }
+          }
+      //! ADD COMMENT USER READ
+      const useCommentRead = (id) =>{
+        const [commentList,setCommentList] = useState();
+        const [isLoading,setIsLoading] = useState(true);
+        useEffect(() => {
+          try {
+          const db = getDatabase(app);
+          const userRef = ref(db,`blog/${id}/comment/`);
+          onValue(userRef,(snapshot)=>{
+            const data = snapshot.val();
+            const commentArray = [];
+            for(let id in data){
+              commentArray.push({id,...data[id]})
+           } 
+           setCommentList(commentArray)
+           setIsLoading(false)
+          })
+        } catch (error) {
+            console.log(error);
+          }
+          
+        }, [])
+        
+        return{commentList,isLoading,setCommentList}
+      }
+      //! Delete Comment
+      const commentDeleteUser = (id) => {
+        const db = getDatabase(app);
+        const userRef = ref(db,"comment/");
+        if(window.confirm("Will Be Deleted!")=== true){
+          remove(ref(db,"comment/"+id))
+          toastDeleteComment("Comment delete")
+        }
+      }
+      
+      //! UPDATE Comment
+      const commentUpdateUser = (card2,navigate) =>{
+        const db = getDatabase(app);
+        const userRef = ref(db,"comment/");
+        const updates = {};
+        updates["comment/"+card2.id]=card2;
+        toastUpdateComment("VERİN GÜNCELLENDİ")
+        navigate(-1)
+        return update(ref(db), updates);
+      }
+
+      return {createUser,useRead,AddUser,logout,observerUser,signIn,signUpWithGoogle,deleteUser,updateUser,addUserComment,useCommentRead,commentDeleteUser}
     }
     
     export default useFirebase
 
-
-    // TODO: Replace the following with your app's Firebase project configuration
-    // See: https://firebase.google.com/docs/web/learn-more#config-object
-
-    // const db = getDatabase(app);
-    // const userRef = ref(db,"blog/");
-    // onValue(userRef,(snapshot)=>{
-    //   const data = snapshot.val();
-    //   const userArray =[]
-    //   for(let id in data){
-    //     userArray.push({id,...data[id]})
-    //   }
-    //   setContactList(userArray)
-    // })
-
-
+    
+    

@@ -8,8 +8,8 @@ import NewBlog from "../pages/NewBlog";
 import Profile from "../pages/Profile";
 import Navbar from '../components/Navbar';
 import PrivateRouter from './PrivateRouter';
+import UpdateBlog from '../pages/UpdateBlog';
 const AppRouter = () => {
-  
   return (
     <BrowserRouter>
     <Navbar/>
@@ -19,7 +19,11 @@ const AppRouter = () => {
       <Route path='/register' element={<Register/>}/>
 
       <Route path='/details/:id' element={<PrivateRouter/>}>
-      <Route path='' element={<Details/>}/>
+      <Route index element={<Details/>}/>
+      </Route>
+
+      <Route path='/update' element={<PrivateRouter/>}>
+      <Route path='' element={<UpdateBlog/>}/>
       </Route>
 
       <Route path='/newBlog' element={<PrivateRouter/>} >
@@ -29,6 +33,7 @@ const AppRouter = () => {
       <Route path='/profile' element={<PrivateRouter/>} >
       <Route path='' element={<Profile/>} />
       </Route>
+
 
     </Routes>
     </BrowserRouter>
