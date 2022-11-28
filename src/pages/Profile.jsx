@@ -17,7 +17,7 @@ console.log(auth);
             </span>
           </div>
           <div className="mt-6 w-fit mx-auto">
-            <img src={auth.currentUser?.photoURL || avatar} className="rounded-full w-28 " alt="profile picture" srcSet />
+            <img src={auth.currentUser?.photoURL || avatar} className="rounded-full w-28 " alt="profile picture"  />
           </div>
           <div className="mt-8 ">
             <h2 className="text-white font-bold text-2xl tracking-wide">{auth.currentUser.displayName}</h2>

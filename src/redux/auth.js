@@ -1,12 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-        // initialState firstName lastName email password
-// const [firstName, setFirstName] = useState("");
-// const [lastName, setLastName] = useState("");
-// const [email, setEmail] = useState("");
-// const [password, setPassword] = useState("");
-// const [currentUser, setcurrentUser] = useState(false);
-// onChange={(e) => setLastName(e.target.value)}
-
 const initialState={
     firstName:"",
     lastName:"",

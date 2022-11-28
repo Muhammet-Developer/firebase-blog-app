@@ -9,7 +9,7 @@ export const toastLoggedOut = (msg)=> {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "colored",
+    theme: "light",
 });
 }
 
@@ -112,4 +112,28 @@ draggable: true,
 progress: undefined,
 theme: "light",
       });
+}
+export const toastSignControl = (msg)=>{
+    toast.warn(msg, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+    progress: undefined,
+    theme: "light",
+});
+}
+export const toastInformation = (msg)=>{
+    toast(msg, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
 }

@@ -22,12 +22,12 @@ const {commentList,isLoading,setCommentList} = useCommentRead();
         photo:currentUser.photoUrl,
         time:time,
         email:currentUser.email,
-        id:card.id
+        // id:card.id
     })
     const handleSubmit = (e)=>{
         e.preventDefault();
         addUserComment({...comment},id)
-        setComment("");
+        setComment({});
     }
   return (
     <>

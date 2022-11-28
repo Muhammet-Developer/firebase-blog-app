@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom';
 
-const CommentModal = ({ open, onClose}) => {
+const CommentModal = ({ open, onClose,commentList}) => {
   const{state:item} = useLocation()
-    // const [updateComment, setUpdateComment] = useState(item);
+  console.log(commentList)
+    const [updateComment, setUpdateComment] = useState(commentList);
     if (!open) return null;
     return (
         <>           
@@ -46,7 +47,7 @@ const CommentModal = ({ open, onClose}) => {
                     <div className="mt-2">   
                     {/* {id === updateComment.id ? console.log("eşit"):console.log("değil") } */}
                     <textarea className="block w-full mt-1 rounded " id='text' name='text'
-                    //  value={updateComment.explanation || ""} 
+                    //  value={updateComment.text || ""} 
                     // onChange={(e)=> setUpdateComment({...updateComment, text:e.target.value})}
                     rows={3}   
                     />

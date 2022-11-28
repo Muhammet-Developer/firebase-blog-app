@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import AddComment from '../components/AddComment';
@@ -9,11 +9,15 @@ const Details = () => {
   const navigate = useNavigate()
   const {deleteUser} = useFirebase();
   const {currentUser} = useSelector(state => state.auth)
+  useEffect(() => {
+   
+  }, [card])
+  
 
   return (
     <>
       {/* Container */}
-      <div className="container mt-32 mx-auto p-4 md:p-0" key={card.index}>
+      <div className="container mt-32 mx-auto p-4 md:p-0" key={card?.index}>
         {/* Card wrapper */}
         <div className="shadow-lg flex flex-wrap w-full lg:w-4/5 mx-auto">
           {/* Card image */}

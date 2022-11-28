@@ -7,7 +7,7 @@ import { getDatabase,  onValue,  push, ref, remove, set, update } from "firebase
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../redux/auth";
-import { toastDeleteComment, toastDeleted, toastLoggedOut, toastLogin, toastNewBlog, toastSigIn, toastThereIsUser, toastUpdate, toastUpdateComment } from "./toastNotify";
+import { toastDeleteComment, toastDeleted, toastLoggedOut, toastLogin, toastNewBlog, toastSigIn, toastSignControl, toastThereIsUser, toastUpdate, toastUpdateComment } from "./toastNotify";
 const useFirebase = () => {
         //! LOGİN AYARLARI
         const dispatch = useDispatch()
@@ -15,7 +15,7 @@ const useFirebase = () => {
             apiKey: process.env.REACT_APP_apiKey,
             authDomain: process.env.REACT_APP_authDomain,
             projectId: process.env.REACT_APP_projectId,
-           databaseURL: "https://blog-app-3f90f-default-rtdb.firebaseio.com",    
+           databaseURL: process.env.REACT_APP_databaseURL,    
           storageBucket: process.env.REACT_APP_storageBucket,
             messagingSenderId: process.env.REACT_APP_messagingSenderId,
             appId: process.env.REACT_APP_appId
@@ -36,7 +36,6 @@ const useFirebase = () => {
              await updateProfile(auth.currentUser, {
                  displayName: displayName,
                 });
-                console.log(userCredential)
                 toastSigIn("Registration Successful")
               navigate("/login")
           } catch (error) {
@@ -57,7 +56,7 @@ const useFirebase = () => {
               
               catch (error) {
                   console.log(error.message)
-                  alert(error.message)
+                  toastSignControl("Your password or e-mail address is incorrect!")
               }
           }
            const observerUser = () =>{
@@ -70,7 +69,7 @@ const useFirebase = () => {
                 //   console.log(user);
                   } else {
                     dispatch(setCurrentUser(false))
-                   console.log("user sign out")
+                  //  console.log("user sign out")
                   }
                 });
           
@@ -164,7 +163,7 @@ const useFirebase = () => {
             const userRef = ref(db,"blog/");
             const updates = {};
             updates["blog/"+card2.id]=card2;
-            toastUpdate("VERİN GÜNCELLENDİ")
+            toastUpdate("Blog updated")
             navigate(-1)
             return update(ref(db), updates);
           }
@@ -183,7 +182,7 @@ const useFirebase = () => {
               displayName:comment.displayName,
               time:comment.time,
               email:comment.email,
-              id:comment.id
+              // id:comment.id
             })       
             toastNewBlog("yorum eklendi")
           } catch (error) {
@@ -216,11 +215,11 @@ const useFirebase = () => {
         return{commentList,isLoading,setCommentList}
       }
       //! Delete Comment
-      const commentDeleteUser = (id) => {
+      const commentDeleteUser = (idler,id) => {
         const db = getDatabase(app);
-        const userRef = ref(db,"comment/");
+        const userRef = ref(db,`blog/${idler}/comment/${id}`);
         if(window.confirm("Will Be Deleted!")=== true){
-          remove(ref(db,"comment/"+id))
+          remove(ref(db,`blog/${idler}/comment/`+id))
           toastDeleteComment("Comment delete")
         }
       }
