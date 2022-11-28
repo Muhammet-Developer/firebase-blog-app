@@ -18,7 +18,7 @@ return (
     <div className="grid xl:grid-cols-4 lg:grid-cols-3  md:grid-cols-2   ">
     {isLoading ? (
      <div className="m-auto">
-         <BounceLoader color="#36d7b7" />
+         <BounceLoader color="#ffffff" />
    </div>
     ): contactList?.lenght === 0 ? (
       <h1>No Data</h1>
