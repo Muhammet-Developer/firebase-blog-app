@@ -15,7 +15,7 @@ useEffect(() => {
 
 return (
     <>
-    <div className="grid xl:grid-cols-4 lg:grid-cols-3  md:grid-cols-2   ">
+    <div className="grid xl:grid-cols-4 lg:grid-cols-3  md:grid-cols-2" >
     {isLoading ? (
      <div className="m-auto">
          <BounceLoader color="#ffffff" />
@@ -29,7 +29,7 @@ return (
         count++
       }
       return(
-        <div key={index} className="mx-auto px-4 py-8 max-w-xl  w-11/12 ">
+        <div key={index} className="mx-auto px-4 py-8 max-w-xl w-11/12 cursor-pointer "  onClick={()=> navigate("details/"+id,{state:person})}>
     <div className="bg-white shadow-2xl rounded-lg  tracking-wide">
       <div className="md:flex-shrink-0">
         <img src={imgUrl} alt="mountains" className="w-full h-64 rounded-lg rounded-b-none" />
