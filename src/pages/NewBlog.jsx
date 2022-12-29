@@ -7,7 +7,7 @@ const NewBlog = () => {
   return (
     <>
       <img className="w-96 h-96 rounded-full mx-auto" 
-      src={img} />
+      src={img} alt="newBlog"/>
       <BlogForm/>
       </>    
   )

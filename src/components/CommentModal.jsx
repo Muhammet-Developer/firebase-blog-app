@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const CommentModal = ({ open, onClose,commentList}) => {
   const{state:item} = useLocation()
-  console.log(commentList)
     const [updateComment, setUpdateComment] = useState(commentList);
     if (!open) return null;
     return (
@@ -45,10 +44,7 @@ const CommentModal = ({ open, onClose,commentList}) => {
                       Deactivate account
                     </h3>
                     <div className="mt-2">   
-                    {/* {id === updateComment.id ? console.log("eşit"):console.log("değil") } */}
                     <textarea className="block w-full mt-1 rounded " id='text' name='text'
-                    //  value={updateComment.text || ""} 
-                    // onChange={(e)=> setUpdateComment({...updateComment, text:e.target.value})}
                     rows={3}   
                     />
 

@@ -7,11 +7,9 @@ import { useSelector } from 'react-redux';
 
 const Comment = ({card}) => {
   const {useCommentRead,} = useFirebase();
-  // const {id} = card;
   const name = card;
-  const {id:idler} = name;
-  console.log(card);
-  const {commentList,isLoading,setCommentList} = useCommentRead(idler);
+  const {id:idTypes} = name;
+  const {commentList,isLoading,setCommentList} = useCommentRead(idTypes);
   const [openModal, setOpenModal] = useState(false);
   const {commentDeleteUser} = useFirebase();
   const navigate = useNavigate()
@@ -21,7 +19,6 @@ const Comment = ({card}) => {
     <>
     {commentList?.map((item,index)=>{
       const {id,text} = item;
-      console.log(item)
     return(
       <div className=" relative top-1/3 content-center flex justify-center " key={index}>
         <div className="relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg  w-1/2">
@@ -31,7 +28,7 @@ const Comment = ({card}) => {
               {currentUser?.email === commentList?.email ? 
               <div className="flex flex-row justify-between">
                 <p className="relative text-2xl whitespace-nowrap truncate overflow-hidden">{item.displayName}</p>
-                <a className="text-gray-500 text-xl" ><i className="fa-solid fa-trash" onClick={()=> commentDeleteUser(idler,id)} /> 
+                <a className="text-gray-500 text-xl" ><i className="fa-solid fa-trash" onClick={()=> commentDeleteUser(idTypes,id)} /> 
                 <i className="fa-solid fa-pen-to-square ml-1"  
                 onClick={() =>{setOpenModal(true) 
                 }}></i></a>

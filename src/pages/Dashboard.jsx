@@ -36,7 +36,6 @@ return (
       }
       
       return(
-        <>
         <div key={index} className="mx-auto px-4 py-8 max-w-xl w-11/12 cursor-pointer "  onClick={()=> navigate("details/"+id,{state:person})}>
         <div className="bg-white shadow-2xl rounded-lg  tracking-wide">
         <div className="md:flex-shrink-0">
@@ -68,7 +67,6 @@ return (
       </div>
       </div>
       </div>
-    </>
       )})}
       </div>
     

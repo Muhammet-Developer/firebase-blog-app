@@ -2,13 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import avatar from "../assets/user-286.png"
-// import  {logout}  from "../helpers/firebase";
 import useFirebase from "../helpers/firebase";
 const Navbar = () => {
   const auth = useSelector(state => state.auth);
-  // console.log(auth.firstName);
   const {logout} = useFirebase()
-  // const currentUser = {displayName: "felix w" }
   return (
     <>
     <nav className="w-full flex flex-wrap items-center

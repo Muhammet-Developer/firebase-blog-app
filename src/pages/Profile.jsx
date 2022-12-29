@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import avatar from "../assets/user-286.png"
 const Profile = () => {
   const auth = useSelector(state=>state.auth)
-console.log(auth);
   return (
     <>
      <section style={{fontFamily: 'Montserrat'}} className="  flex font-medium items-center justify-center h-screen">

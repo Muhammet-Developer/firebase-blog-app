@@ -215,11 +215,11 @@ const useFirebase = () => {
         return{commentList,isLoading,setCommentList}
       }
       //! Delete Comment
-      const commentDeleteUser = (idler,id) => {
+      const commentDeleteUser = (idTypes,id) => {
         const db = getDatabase(app);
-        const userRef = ref(db,`blog/${idler}/comment/${id}`);
+        const userRef = ref(db,`blog/${idTypes}/comment/${id}`);
         if(window.confirm("Will Be Deleted!")=== true){
-          remove(ref(db,`blog/${idler}/comment/`+id))
+          remove(ref(db,`blog/${idTypes}/comment/`+id))
           toastDeleteComment("Comment delete")
         }
       }

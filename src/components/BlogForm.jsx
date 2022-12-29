@@ -5,7 +5,6 @@ import {setForm } from '../features/blog'
 
 const BlogForm = () => {
   const {AddUser} = useFirebase()
-  // console.log(AddUser);
     const {form} = useSelector(state=> state.blog)
     const {currentUser} = useSelector(state=>state.auth)
     const navigate = useNavigate()

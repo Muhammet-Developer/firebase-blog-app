@@ -4,15 +4,9 @@ import  useFirebase  from '../helpers/firebase'
 import {setFirstName,setLastName,setEmail,setPassword} from "../features/auth"
 import {useNavigate} from "react-router-dom"
 const Register = () => {
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [email2, setEmail] = useState("");
-  // const [password2, setPassword] = useState("");
-
   const navigate = useNavigate()
   const {createUser,signUpWithGoogle} = useFirebase()
   const auth = useSelector(state=> state.auth);
-  // console.log(auth)
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
