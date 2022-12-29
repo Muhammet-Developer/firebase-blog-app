@@ -14,9 +14,9 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
     <Navbar/>
-    <SkeletonTheme>
+    <SkeletonTheme baseColor="#202020" highlightColor="#444">
 
-    <Routes baseColor="#202020" highlightColor="#444">
+    <Routes >
       <Route path='/' element={<Dashboard/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
