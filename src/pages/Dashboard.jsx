@@ -16,17 +16,15 @@ useEffect(() => {
 return (
     <>
 
-    <div className="grid xl:grid-cols-4 lg:grid-cols-3  md:grid-cols-2" >
+    <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full" >
     {
-    isLoading ? 
-    <CardLoader/>
-    // contactList?.map((asd)=>{
-    //   console.log(asd);
-    //   return(
-    //     <CardLoader/>
-    //     )
-    // }
-    // )
+      isLoading ? 
+      <>
+      <CardLoader/>
+      <CardLoader/>
+      <CardLoader/>
+      <CardLoader/>
+      </>
     :
      contactList?.lenght === 0 ? (
       <h1>No Data</h1>
@@ -41,8 +39,6 @@ return (
         <>
         <div key={index} className="mx-auto px-4 py-8 max-w-xl w-11/12 cursor-pointer "  onClick={()=> navigate("details/"+id,{state:person})}>
         <div className="bg-white shadow-2xl rounded-lg  tracking-wide">
-        {isLoading ? <CardLoader/> :
-          <>
         <div className="md:flex-shrink-0">
         <img src={imgUrl} alt="mountains" className="w-full h-64 rounded-lg rounded-b-none" />
         </div>
@@ -70,8 +66,6 @@ return (
         </h2>
         </div>
       </div>
-        </>
-      }
       </div>
       </div>
     </>

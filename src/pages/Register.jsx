@@ -17,7 +17,6 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(auth.firstName);
     const displayName =`${auth.firstName} ${auth.lastName}`
     const time = new Date();
    const years = time.getFullYear();
