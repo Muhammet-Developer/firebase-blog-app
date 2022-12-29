@@ -6,7 +6,7 @@ import { getAuth,createUserWithEmailAndPassword,
 import { getDatabase,  onValue,  push, ref, remove, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../redux/auth";
+import { setCurrentUser } from "../features/auth";
 import { toastDeleteComment, toastDeleted, toastLoggedOut, toastLogin, toastNewBlog, toastSigIn, toastSignControl, toastThereIsUser, toastUpdate, toastUpdateComment } from "./toastNotify";
 const useFirebase = () => {
         //! LOGİN AYARLARI

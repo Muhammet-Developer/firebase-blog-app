@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import useFirebase from '../helpers/firebase';
-import {setForm } from '../redux/blog'
+import {setForm } from '../features/blog'
 
 const BlogForm = () => {
   const {AddUser} = useFirebase()

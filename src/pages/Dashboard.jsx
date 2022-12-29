@@ -19,12 +19,14 @@ return (
     <div className="grid xl:grid-cols-4 lg:grid-cols-3  md:grid-cols-2" >
     {
     isLoading ? 
-    contactList?.map((asd)=>{
-      return(
-
-        <CardLoader/>
-        )
-    })
+    <CardLoader/>
+    // contactList?.map((asd)=>{
+    //   console.log(asd);
+    //   return(
+    //     <CardLoader/>
+    //     )
+    // }
+    // )
     :
      contactList?.lenght === 0 ? (
       <h1>No Data</h1>

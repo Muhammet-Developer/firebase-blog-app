@@ -1,7 +1,7 @@
 import React from 'react'
 import {useSelector,useDispatch} from "react-redux"
 import  useFirebase  from '../helpers/firebase'
-import {setFirstName,setLastName,setEmail,setPassword} from "../redux/auth"
+import {setFirstName,setLastName,setEmail,setPassword} from "../features/auth"
 import {useNavigate} from "react-router-dom"
 const Register = () => {
   // const [firstName, setFirstName] = useState("");

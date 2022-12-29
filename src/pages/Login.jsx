@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import "../index.css"
 import {useSelector,useDispatch} from "react-redux"
-import {setEmail,setPassword} from "../redux/auth"
+import {setEmail,setPassword} from "../features/auth"
 import {useNavigate} from "react-router-dom"
 
 import useFirebase from '../helpers/firebase';

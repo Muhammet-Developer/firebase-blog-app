@@ -4,7 +4,7 @@ import './App.css';
 import AppRouter from './router/AppRouter';
  import useFirebase from './helpers/firebase';
 import { useDispatch } from 'react-redux';
-import { setCurrentUser } from './redux/auth';
+import { setCurrentUser } from './features/auth';
 
 function App() {
   const dispatch = useDispatch()
