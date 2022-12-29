@@ -9,11 +9,14 @@ import Profile from "../pages/Profile";
 import Navbar from '../components/Navbar';
 import PrivateRouter from './PrivateRouter';
 import UpdateBlog from '../pages/UpdateBlog';
+import { SkeletonTheme } from 'react-loading-skeleton';
 const AppRouter = () => {
   return (
     <BrowserRouter>
     <Navbar/>
-    <Routes>
+    <SkeletonTheme>
+
+    <Routes baseColor="#202020" highlightColor="#444">
       <Route path='/' element={<Dashboard/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
@@ -33,9 +36,8 @@ const AppRouter = () => {
       <Route path='/profile' element={<PrivateRouter/>} >
       <Route path='' element={<Profile/>} />
       </Route>
-
-
     </Routes>
+    </SkeletonTheme>
     </BrowserRouter>
   )
 }
